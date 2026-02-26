@@ -23,7 +23,7 @@ export type Trip = {
   durationDays: number;
   startDate: string;
   endDate: string;
-  priceEur: number;
+  priceMad: number;
   placesTotal: number;
   placesRemaining: number;
   location: string;

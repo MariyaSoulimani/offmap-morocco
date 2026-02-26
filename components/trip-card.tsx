@@ -41,7 +41,7 @@ export function TripCard({ trip }: TripCardProps) {
           <li>{trip.placesRemaining} places restantes</li>
         </ul>
         <div className="flex items-center justify-between pt-2">
-          <p className="font-semibold text-offmap-orange">{trip.priceEur} EUR</p>
+          <p className="font-semibold text-offmap-orange">{trip.priceMad} MAD</p>
           <Link
             href={`/trips/${trip.slug}`}
             className="rounded-full border border-offmap-orange px-4 py-2 text-sm font-semibold text-offmap-orange transition hover:bg-offmap-orange hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offmap-orange focus-visible:ring-offset-2"

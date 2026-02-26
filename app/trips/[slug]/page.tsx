@@ -59,7 +59,7 @@ export default function TripDetailPage({ params }: TripPageProps) {
               <Info title="Niveau" value={trip.level} />
               <Info title="Lieu" value={trip.location} />
               <Info title="Places" value={`${trip.placesRemaining} / ${trip.placesTotal}`} />
-              <Info title="Prix" value={`${trip.priceEur} EUR`} />
+              <Info title="Prix" value={`${trip.priceMad} MAD`} />
             </div>
 
             <InfoList title="Ce qui est inclus" items={trip.included} />

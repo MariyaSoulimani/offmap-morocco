@@ -66,7 +66,7 @@ Chaque trip contient:
 - `slug`, `title`, `tagline`
 - `theme`, `level`
 - `durationDays`, `startDate`, `endDate`
-- `priceEur`, `placesTotal`, `placesRemaining`
+- `priceMad`, `placesTotal`, `placesRemaining`
 - `description`, `included`, `toBring`, `itinerary`, `safetyRules`
 - `imageIds`, `tags`
 
