@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  @apply font-body text-offmap-gray antialiased;
+}
+
+main {
+  @apply min-h-[70vh];
+}
