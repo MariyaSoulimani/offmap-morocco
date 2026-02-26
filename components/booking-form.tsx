@@ -37,6 +37,10 @@ export function BookingForm({ trips, initialTrip }: BookingFormProps) {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjbwpzn"; // بدّليها بالـ endpoint ديالك
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const selectedTrip = useMemo(
     () => trips.find((trip) => trip.slug === values.trip),
     [trips, values.trip],
@@ -52,13 +56,34 @@ export function BookingForm({ trips, initialTrip }: BookingFormProps) {
     return nextErrors;
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      return;
-    }
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+  setSubmitError(null);
+
+  const nextErrors = validate();
+  setErrors(nextErrors);
+  if (Object.keys(nextErrors).length > 0) return;
+
+  setIsSubmitting(true);
+
+  try {
+    const payload = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      seats: values.seats,
+      trip: values.trip,
+      tripTitle: selectedTrip?.title ?? values.trip,
+      preferences: values.preferences || "Aucune preference specifique",
+    };
+
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error("Formspree error");
 
     const params = new URLSearchParams({
       name: values.name,
@@ -70,7 +95,12 @@ export function BookingForm({ trips, initialTrip }: BookingFormProps) {
     });
 
     router.push(`/booking/thanks?${params.toString()}`);
+  } catch {
+    setSubmitError("Impossible d’envoyer la réservation. Réessaie dans quelques instants.");
+  } finally {
+    setIsSubmitting(false);
   }
+}
 
   return (
     <form onSubmit={onSubmit} className="space-y-5 rounded-2xl border border-offmap-sand/30 bg-white p-6 shadow-soft">
