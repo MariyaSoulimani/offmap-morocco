@@ -211,9 +211,10 @@ export function BookingForm({ trips, initialTrip }: BookingFormProps) {
 
       <button
         type="submit"
-        className="w-full rounded-full bg-offmap-orange px-6 py-3 font-semibold text-white transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offmap-orange focus-visible:ring-offset-2"
+        disabled={isSubmitting}
+        className="w-full rounded-full bg-offmap-orange px-6 py-3 font-semibold text-white transition hover:brightness-95 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offmap-orange focus-visible:ring-offset-2"
       >
-        Envoyer la reservation
+        {isSubmitting ? "Envoi en cours..." : "Envoyer la reservation"}
       </button>
     </form>
   );
